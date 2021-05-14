@@ -2,7 +2,8 @@ const chalk = require("chalk");
 const mongoose = require("mongoose");
 
 module.exports = (client) => {
-  client.user.setActivity("c/help", { type: "WATCHING" });
+
+  client.user.setActivity("c/help", { type: "PLAYING" });
 
   let allMembers = new Set();
   client.guilds.cache.forEach((guild) => {
@@ -24,6 +25,7 @@ module.exports = (client) => {
     chalk.bgMagentaBright.black(` ${allMembers.size} members `)
   );
 
+  /*
   mongoose
     .connect(process.env.mongo_url, {
       useNewUrlParser: true,
@@ -42,5 +44,5 @@ module.exports = (client) => {
           .black(` ${client.user.username} could not connect to mongo DB `)
       )
     );
-
+*/
 };
