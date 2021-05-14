@@ -1,0 +1,23 @@
+{
+  "name": "cronos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cronos.js",
+  "scripts": {
+    "start": "node cronos.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elttayman-Co/Cronos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elttayman-Co/Cronos/issues"
+  },
+  "homepage": "https://github.com/elttayman-Co/Cronos#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^9.0.2"
+  }
+}
