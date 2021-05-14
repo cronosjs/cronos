@@ -2,7 +2,7 @@ require("dotenv").config({path: __dirname + "/.env"})
 
 const { Client, Collection } = require("discord.js");
 const chalk = require("chalk");
-const { prefix } = require("./config.json");
+const { prefix } = require("./json/config.json");
 const client = new Client({ disableMentions: "everyone" });
 // const { loadCommands } = require("./loadcmds");
 
