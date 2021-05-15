@@ -1,4 +1,4 @@
-/* function loadCommands(client) {
+function loadCommands(client) {
   const fs = require("fs");
 
   const commandFolders = fs.readdirSync("./src/commands");
@@ -16,4 +16,3 @@
 module.exports = {
   loadCommands,
 };
-*/
