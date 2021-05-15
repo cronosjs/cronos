@@ -1,4 +1,4 @@
-require("dotenv").config({path: "./.env"})
+require("dotenv").config({ path: __dirname + "/.env" });
 
 const {Client, Collection} = require("discord.js");
 const chalk = require("chalk");
