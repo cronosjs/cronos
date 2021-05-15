@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/cronos.js",
   "scripts": {
-    "start": "node cronos.js"
+    "start": "node src/cronos.js"
   },
   "repository": {
     "type": "git",
