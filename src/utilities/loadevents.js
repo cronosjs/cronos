@@ -1,8 +1,7 @@
 const reqEvent = (event) => require(`../events/${event}`);
-const Discord = require('discord.js')
+const Discord = require("discord.js");
 
 module.exports = (client) => {
-
   const cooldowns = new Discord.Collection();
 
   client.on("ready", () => reqEvent("ready")(client));

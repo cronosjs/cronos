@@ -1,7 +1,7 @@
 const { prefix, support_server } = require("../json/config.json");
-const { welcome } = require('../json/emojis.json')
+const { welcome } = require("../json/emojis.json");
 
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require("discord.js");
 module.exports = async (guild) => {
   var channel = guild.channels.cache
     .filter((chx) => chx.type === "text")
@@ -9,9 +9,7 @@ module.exports = async (guild) => {
 
   let newEmbed = new MessageEmbed()
     .setColor("#9761f5")
-    .setTitle(
-      `Thanks for inviting me into this server ${welcome}`
-    )
+    .setTitle(`Thanks for inviting me into this server ${welcome}`)
     .setDescription(
       `- My default prefix is \`${prefix}\`\r\n\r\n- To change my prefix type \`${prefix}prefix <prefix>\`\r\n\r\n- Type \`${prefix}help\` to get a list of avaliable commands\r\n\r\n- Feel free to join our support server if you need help [Click here!!](\`${support_server}\`)`
     );

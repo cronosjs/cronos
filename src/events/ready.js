@@ -2,7 +2,6 @@ const chalk = require("chalk");
 const mongoose = require("mongoose");
 
 module.exports = (client) => {
-
   client.user.setActivity("c/help", { type: "PLAYING" });
 
   let allMembers = new Set();

@@ -2,18 +2,15 @@ const { prefix } = require("../json/config.json");
 const Discord = require("discord.js");
 
 module.exports = async (message, cooldowns) => {
- 
-
   if (message.author.bot) return;
   if (!message.guild) return;
 
-
   let client = message.client;
 
-  if (!message.guild.me.permissionsIn(message.channel).has("SEND_MESSAGES")) return;
+  if (!message.guild.me.permissionsIn(message.channel).has("SEND_MESSAGES"))
+    return;
 
-
-  let p = prefix
+  let p = prefix;
 
   // mentioned bot
   if (message.content.startsWith(`<@${message.client.user.id}>`)) {
@@ -34,7 +31,6 @@ module.exports = async (message, cooldowns) => {
     );
 
   if (!command) return;
-
 
   // cooldowns
   if (!cooldowns.has(command.name)) {
