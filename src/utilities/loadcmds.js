@@ -7,7 +7,7 @@ function loadCommands(client) {
       .readdirSync(`./src/commands/${folder}`)
       .filter((file) => file.endsWith(".js"));
     for (const file of commandFiles) {
-      const command = require(`./commands/${folder}/${file}`);
+      const command = require(`../commands/${folder}/${file}`);
       client.commands.set(command.name, command);
     }
   }
