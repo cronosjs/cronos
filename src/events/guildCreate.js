@@ -1,8 +1,17 @@
 const { prefix, support_server } = require("../json/config.json");
 const { welcome } = require("../json/emojis.json");
-
+const guildDoc = require("../models/guild");
 const { MessageEmbed } = require("discord.js");
+
 module.exports = async (guild) => {
+
+  const sb = new guildDoc({
+    Guild: guild.id,
+    Prefix: "c/",
+  });
+
+  await sb.save().catch((err) => console.log(err));
+
   var channel = guild.channels.cache
     .filter((chx) => chx.type === "text")
     .find((x) => x.position === 0);

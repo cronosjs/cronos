@@ -21,6 +21,7 @@
     "cronos-xp": "^1.0.4",
     "discord.js": "^12.5.3",
     "dotenv": "^9.0.2",
+    "memer-api": "^3.0.0-beta.0",
     "mongoose": "^5.12.9"
   }
 }
