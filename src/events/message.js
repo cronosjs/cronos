@@ -1,4 +1,3 @@
-const { prefix } = require("../json/config.json");
 const Discord = require("discord.js");
 
 module.exports = async (message, cooldowns) => {
@@ -10,7 +9,7 @@ module.exports = async (message, cooldowns) => {
   if (!message.guild.me.permissionsIn(message.channel).has("SEND_MESSAGES"))
     return;
 
-  let p = prefix;
+  let p = client.prefix;
 
   // mentioned bot
   if (message.content.startsWith(`<@${message.client.user.id}>`)) {
@@ -77,13 +76,16 @@ module.exports = async (message, cooldowns) => {
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
   try {
-    command.execute(client, message, args, cooldowns);
+    //async execute(client, message, args, prefix)
+    command.execute(client, message, args, p, cooldowns);
   } catch (error) {
     console.error(error);
     message.channel
       .send("There was an error executing that command.")
       .then((msg) => {
-        msg.delete({ timeout: 5000 });
+         setTimeout(() => {
+           msg.delete();
+         }, 5000);
       })
       .catch(console.error);
   }

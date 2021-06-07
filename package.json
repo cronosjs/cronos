@@ -18,6 +18,7 @@
   "homepage": "https://github.com/elttayman-Co/Cronos#readme",
   "dependencies": {
     "chalk": "^4.1.1",
+    "cronos-xp": "^1.0.4",
     "discord.js": "^12.5.3",
     "dotenv": "^9.0.2",
     "mongoose": "^5.12.9"
