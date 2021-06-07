@@ -1,4 +1,4 @@
-require("dotenv").config({ path: __dirname + "/.env" });
+require("dotenv").config({ path: ".env" });
 
 const chalk = require("chalk");
 const CronosXp = require("cronos-xp");
@@ -22,11 +22,12 @@ const client = new Client({
   ],
 });
 
+console.log(process.env.mongo_url)
+console.log(process.env.main_token)
+
 const Level = new CronosXp(process.env.mongo_url, {
   linear: false, //Default value
-  xpGap: 300, //Default value
   growthMultiplier: 30, //Default value
-  startWithZero: true, //Default value
   returnDetails: false, //Default value
 });
 

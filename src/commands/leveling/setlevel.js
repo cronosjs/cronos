@@ -1,29 +1,27 @@
 module.exports = {
-  name: "setlevel",
-  async execute(client, message, args) {
-    let level = args[0];
+    name: "setlevel",
+    async execute(client, message, args) {
+        let level = args[0];
+        let guildID = message.guild.id
+        let userID = message.author.id
 
-    let guild = client.xp.isGuild(message.guild.id, message.author.id);
+        let guild = await client.xp.isGuild(guildID)
 
-    if (guild) {
-      let user = client.xp.isUser(message.guild.id, message.author.id);
-      if (user) {
-        client.xp.setLevel(message.guild.id, message.author.id, level);
-        return message.channel.send(`Set your level to ${level}`);
-      }
-      else {
-          client.xp.createUser(message.guild.id, message.author.id);
-          client.xp.setLevel(message.guild.id, message.author.id, level);
+        if (!guild) await client.xp.createGuild(guildID)
 
-          return message.channel.send(`Set your level to ${level}`);
-      }
-    } else {
-      client.xp.createGuild(message.guild.id);
-      client.xp.createUser(message.guild.id, message.author.id);
-      client.xp.setLevel(message.guild.id, message.author.id, level);
-
-      return message.channel.send(`Set your level to ${level}`);
-    }
-
-  },
+        client.xp.setLevel(guildID, userID, level).then(() => {
+            return message.channel.send(`Your level was set to level ${level}`)
+        }).catch(async (error) => {
+            if (error) {
+                let user = await client.xp.createUser(guildID, userID)
+                if (user) {
+                    client.xp.setLevel(guildID, userID, level).then((result) => {
+                        return message.channel.send(`Your level was set to level ${level}`)
+                    }).catch((error) => {
+                        return message.channel.send(`**Error:** ${error}`)
+                    })
+                }
+            }
+        })
+    },
 };
