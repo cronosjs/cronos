@@ -3,7 +3,7 @@ require("dotenv").config({ path: ".env" });
 const chalk = require("chalk");
 const CronosXp = require("cronos-xp");
 
-const { prefix } = require("./json/config.json");
+const { prefix, support_server } = require("./json/config.json");
 const { loadCommands } = require("./utilities/loadcmds.js");
 const { Client, Collection, Intents } = require("discord.js");
 
@@ -22,8 +22,6 @@ const client = new Client({
   ],
 });
 
-console.log(process.env.mongo_url)
-console.log(process.env.main_token)
 
 const Level = new CronosXp(process.env.mongo_url, {
   linear: false, //Default value
@@ -41,8 +39,12 @@ client.login(process.env.main_token).then(() => {
   );
 });
 
-client.commands = new Collection();
-client.prefix = prefix;
-client.queue = new Map();
 client.xp = Level;
+client.prefix = prefix;
+client.support = support_server;
+
+client.myemojis = new Collection();
+client.commands = new Collection();
+
+loadEmojis(client)
 loadCommands(client);

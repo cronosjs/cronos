@@ -7,8 +7,11 @@ module.exports = {
       return message.channel.send(
         "Ey ey ey! You can't use that command <a:sh_perms:799392392654225408>"
       );
-
+    
+    // category (channel)
     const cat = args[0]?.toLowerCase();
+
+    // type of channel
     const input = args.slice(1).join(" ");
     const type = input.toLowerCase();
     
