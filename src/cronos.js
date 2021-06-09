@@ -1,11 +1,14 @@
-require("dotenv").config({ path: ".env" });
+require("dotenv").config({ path: "src/.env" });
 
 const chalk = require("chalk");
 const CronosXp = require("cronos-xp");
 
 const { prefix, support_server } = require("./json/config.json");
-const { loadCommands } = require("./utilities/loadcmds.js");
 const { Client, Collection, Intents } = require("discord.js");
+
+const { loadCommands } = require("./utilities/loadcmds.js");
+const { loadEmojis } = require("./utilities/loademojis");
+
 
 const client = new Client({
   allowedMentions: { parse: ["users", "roles"] },

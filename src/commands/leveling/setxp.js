@@ -1,29 +1,29 @@
 module.exports = {
-  name: "setlevel",
+  name: "setxp",
   async execute(client, message, args) {
 
-    // level wanted
-    let level = message.mentions.users.first()
+    // xp wanted to set
+    let xp = message.mentions.users.first()
       ? args.slice(1).join(" ")
       : args[0];
 
-    // user who will get the levels
+    // user who will get the xp
     let target = message.mentions.users.first()
       ? message.mentions.users.first()
       : message.author;
 
     // success message
     let done = message.mentions.users.first()
-      ? `Successfully set **${target.username}** to level **${level}**`
-      : `Successfully set your level to **${level}**`;
+      ? `Successfully set **${target.username}**'s xp to **${xp}**`
+      : `Successfully set your xp to **${xp}**`;
 
     let guildID = message.guild.id;
-
+    
     let guild = await client.xp.isGuild(guildID);
     if (!guild) await client.xp.createGuild(guildID);
 
     client.xp
-      .setLevel(guildID, target.id, level)
+      .setXp(guildID, target.id, xp)
       .then(() => {
         return message.channel.send(done);
       })
@@ -32,7 +32,7 @@ module.exports = {
           let user = await client.xp.createUser(guildID, target.id);
           if (user) {
             client.xp
-              .setLevel(guildID, target.id, level)
+              .setXp(guildID, target.id, xp)
               .then((result) => {
                 return message.channel.send(done);
               })
