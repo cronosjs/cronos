@@ -31,10 +31,12 @@ module.exports = async (message, client) => {
 
   if (sDoc) {
     let lvlCh = sDoc.lvlChannel;
-    let lvlMsg = sDoc.lvlMessage ? sDoc.lvlMessage : `${message.author} is now level ${addedxp.newLevel}`
+    let lvlMsg = sDoc.lvlMessage
+      ? sDoc.lvlMessage
+      : `${message.author} is now level ${addedxp.newLevel}`;
 
     if (lvlCh) {
-        let channel = client.channels.cache.get(lvlCh);
+      let channel = client.channels.cache.get(lvlCh);
 
       // level up message
       if (addedxp.hasLevelUp) {

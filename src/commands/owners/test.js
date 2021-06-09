@@ -1,9 +1,9 @@
 const Meme = require("memer-api");
 const memer = new Meme("8EqDoDv8ZfI");
-const Discord = require("discord.js")
+const Discord = require("discord.js");
 module.exports = {
   name: "test",
   async execute(client, message, args, prefix) {
-     message.channel.send(prefix)
+    message.channel.send(prefix);
   },
 };

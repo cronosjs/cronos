@@ -23,9 +23,7 @@ module.exports = {
       client.xp
         .resetGuild(guildID)
         .then(() => {
-          return message.channel.send(
-            `Successfully reset the xp of all users`
-          );
+          return message.channel.send(`Successfully reset the xp of all users`);
         })
         .catch((error) => {
           return message.channel.send(`**Error:** ${error}`);

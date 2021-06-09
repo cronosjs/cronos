@@ -10,7 +10,6 @@ const { loadCommands } = require("./utilities/loadcmds.js");
 const { loadEmojis } = require("./utilities/loademojis.js");
 const { loadEvents } = require("./utilities/loadevents.js");
 
-
 const client = new Client({
   allowedMentions: { parse: ["users", "roles"] },
   intents: [
@@ -46,6 +45,6 @@ client.support = support_server;
 client.myemojis = new Collection();
 client.commands = new Collection();
 
-loadEmojis(client)
+loadEmojis(client);
 loadCommands(client);
-loadEvents(client)
+loadEvents(client);

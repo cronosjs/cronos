@@ -18,7 +18,7 @@ function loadEvents(client) {
 
   // other events
   client.on("message", (m) => otherEvent("leveling")(m, client));
-  
+
   // warnings and errors
   client.on("warn", (info) => console.log(info));
   client.on("error", console.error);

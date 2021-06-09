@@ -5,9 +5,7 @@ module.exports = {
     let userID = message.author.id;
 
     let user = await client.xp.getUser(guildID, userID);
-  
 
-      return message.channel.send(`Your level is ${user.level}`);
-
+    return message.channel.send(`Your level is ${user.level}`);
   },
 };

@@ -1,7 +1,6 @@
 module.exports = {
   name: "setlevel",
   async execute(client, message, args) {
-
     // level wanted
     let level = message.mentions.users.first()
       ? args.slice(1).join(" ")

@@ -2,7 +2,9 @@ module.exports = {
   name: "addlevel",
   async execute(client, message, args) {
     // levels wanted to add
-    let level = message.mentions.users.first() ? args.slice(1).join(" ") : args[0];
+    let level = message.mentions.users.first()
+      ? args.slice(1).join(" ")
+      : args[0];
 
     // user who will get the levels
     let target = message.mentions.users.first()
