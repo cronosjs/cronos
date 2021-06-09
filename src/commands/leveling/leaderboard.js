@@ -6,14 +6,17 @@ module.exports = {
   async execute(client, message, args) {
     let guildID = message.guild.id;
 
-    let top = client.xp.getLeaderboard(guildID);
+    let limit = Number(args[0])
+    if(!limit || limit <= 0) limit = 10
+
+    let top = await client.xp.getLeaderboard(guildID, limit);
 
     if (!top) return message.reply("Cri cri... No one has xp in this server");
 
     let lbEmbed = new MessageEmbed().setTitle(`${message.guild}'s leaderoard`);
 
-    for (let i = 0; i < 10; i++) {
-      lbEmbed.addField(`${i + 1}: ${top[i][0]}`);
+    for (let i = 0; i < top.length; i++) {
+      lbEmbed.addField(`**${i + 1}:** ${message.guild.members.cache.get(top[i][0]).user.username}`, `**${top[i][1].xp}** (lvl. ${top[i][1].level})` );
     }
 
     return message.channel.send(lbEmbed);
