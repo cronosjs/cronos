@@ -1,14 +1,14 @@
-const clienEvent = (event) => require(`../events/client/${event}`);
+const clientEvent = (event) => require(`../events/client/${event}`);
 const guildEvent = (event) => require(`../events/guild/${event}`);
 const otherEvent = (event) => require(`../events/other/${event}`);
 const Discord = require("discord.js");
 
-module.exports = (client) => {
+function loadEvents(client) {
   const cooldowns = new Discord.Collection();
 
   // client events
-  client.on("ready", () => clienEvent("ready")(client));
-  client.on("message", (m) => clienEvent("mention")(m, client));
+  client.on("ready", () => clientEvent("ready")(client));
+  client.on("message", (m) => clientEvent("mention")(m, client));
 
   // guild events
   client.on("guildCreate", (g) => guildEvent("guildCreate")(g, client));
@@ -23,4 +23,8 @@ module.exports = (client) => {
   client.on("warn", (info) => console.log(info));
   client.on("error", console.error);
   client.on("unhandledRejection", console.error);
+}
+
+module.exports = {
+  loadEvents,
 };

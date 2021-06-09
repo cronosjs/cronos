@@ -7,7 +7,8 @@ const { prefix, support_server } = require("./json/config.json");
 const { Client, Collection, Intents } = require("discord.js");
 
 const { loadCommands } = require("./utilities/loadcmds.js");
-const { loadEmojis } = require("./utilities/loademojis");
+const { loadEmojis } = require("./utilities/loademojis.js");
+const { loadEvents } = require("./utilities/loadevents.js");
 
 
 const client = new Client({
@@ -25,14 +26,11 @@ const client = new Client({
   ],
 });
 
-
 const Level = new CronosXp(process.env.mongo_url, {
   linear: false, //Default value
   growthMultiplier: 30, //Default value
   returnDetails: false, //Default value
 });
-
-require("./utilities/loadevents")(client);
 
 client.login(process.env.main_token).then(() => {
   console.log(
@@ -45,9 +43,9 @@ client.login(process.env.main_token).then(() => {
 client.xp = Level;
 client.prefix = prefix;
 client.support = support_server;
-
 client.myemojis = new Collection();
 client.commands = new Collection();
 
 loadEmojis(client)
 loadCommands(client);
+loadEvents(client)
