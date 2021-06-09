@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const guildDoc = require("../../models/guild");
 
 module.exports = async (message, cooldowns) => {
   if (message.author.bot) return;
@@ -9,14 +10,11 @@ module.exports = async (message, cooldowns) => {
   if (!message.guild.me.permissionsIn(message.channel).has("SEND_MESSAGES"))
     return;
 
-  let p = client.prefix;
+  const sDoc = await guildDoc.findOne({
+    Guild: message.guild.id,
+  });
 
-  // mentioned bot
-  if (message.content.startsWith(message.mentions.has(client.user.id))) {
-    return message.channel.send(
-      `My prefix in this server is \`${p}\`\n\nTo get a list of commands, type \`${p}help\``
-    );
-  }
+  let p = sDoc.Prefix ? sDoc.Prefix : client.prefix;
 
   if (!message.content.startsWith(p)) return;
 
@@ -83,9 +81,9 @@ module.exports = async (message, cooldowns) => {
     message.channel
       .send("There was an error executing that command.")
       .then((msg) => {
-         setTimeout(() => {
-           msg.delete();
-         }, 5000);
+        setTimeout(() => {
+          msg.delete();
+        }, 5000);
       })
       .catch(console.error);
   }

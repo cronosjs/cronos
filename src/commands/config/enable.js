@@ -5,7 +5,7 @@ module.exports = {
   async execute(client, message, args, prefix) {
     if (!message.member.permissions.has("MANAGE_GUILD"))
       return message.channel.send(
-        "Ey ey ey! You can't use that command <a:sh_perms:799392392654225408>"
+        "Ey ey ey! You can't use that command"
       );
     
     // category (channel)
