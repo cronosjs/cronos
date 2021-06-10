@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/elttayman-Co/Cronos#readme",
   "dependencies": {
+    "canvas": "^2.8.0",
     "chalk": "^4.1.1",
     "cronos-xp": "^1.0.4",
     "discord.js": "^12.5.3",

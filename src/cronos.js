@@ -2,6 +2,7 @@ require("dotenv").config({ path: "src/.env" });
 
 const chalk = require("chalk");
 const CronosXp = require("cronos-xp");
+const cronosImg = require("../cronos-images/src/index");
 
 const { prefix, support_server } = require("./json/config.json");
 const { Client, Collection, Intents } = require("discord.js");
@@ -40,6 +41,7 @@ client.login(process.env.main_token).then(() => {
 });
 
 client.xp = Level;
+client.images = cronosImg
 client.prefix = prefix;
 client.support = support_server;
 client.myemojis = new Collection();
