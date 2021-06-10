@@ -1,6 +1,10 @@
 module.exports = {
   name: "addxp",
   async execute(client, message, args) {
+    if (!message.member.permissions.has("MANAGE_GUILD")) {
+      return message.channel.send("Ey ey ey! You can't use that command");
+    }
+
     // xp wanted to add
     let xp = message.mentions.users.first() ? args.slice(1).join(" ") : args[0];
 

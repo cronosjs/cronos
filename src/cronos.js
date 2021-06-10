@@ -28,7 +28,7 @@ const client = new Client({
 const Level = new CronosXp(process.env.mongo_url, {
   linear: false, //Default value
   growthMultiplier: 30, //Default value
-  returnDetails: false, //Default value
+  returnDetails: true, //Default value
 });
 
 client.login(process.env.main_token).then(() => {

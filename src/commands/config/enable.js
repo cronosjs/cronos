@@ -3,8 +3,9 @@ const guildDoc = require("../../models/guild");
 module.exports = {
   name: "enable",
   async execute(client, message, args, prefix) {
-    if (!message.member.permissions.has("MANAGE_GUILD"))
+    if (!message.member.permissions.has("MANAGE_GUILD")) {
       return message.channel.send("Ey ey ey! You can't use that command");
+    }
 
     // category (channel)
     const cat = args[0]?.toLowerCase();

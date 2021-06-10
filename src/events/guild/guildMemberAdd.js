@@ -4,6 +4,14 @@ const memer = new Meme("8EqDoDv8ZfI");
 const Discord = require("discord.js");
 
 module.exports = async (member, client) => {
+
+  let guildID = member.guild.id;
+
+  let guild = await client.xp.isGuild(guildID);
+  if (!guild) await client.xp.createGuild(guildID);
+
+  await client.xp.createUser(guildID, member.id);
+
   const sDoc = await guildDoc.findOne({
     Guild: member.guild.id,
   });
