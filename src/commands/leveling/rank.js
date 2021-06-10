@@ -26,9 +26,6 @@ module.exports = {
       .setReputation(0)
       .setTitle("soon")
       .setUsername(target.username)
-      .setBackground(
-        "https://cdn.discordapp.com/attachments/841771467149410304/852588834235482162/gradient.png"
-      )
       .toAttachment();
 
     const attachment = new Discord.MessageAttachment(
