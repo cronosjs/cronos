@@ -47,6 +47,7 @@ client.support = support_server;
 client.myemojis = new Collection();
 client.commands = new Collection();
 
-loadEmojis(client);
+require("discord-buttons")(client)
 loadCommands(client);
 loadEvents(client);
+loadEmojis(client)

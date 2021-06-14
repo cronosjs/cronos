@@ -3,6 +3,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
   name: "leaderboard",
   aliases: ["lb", "topxp"],
+  category: "leveling",
   async execute(client, message, args) {
     let guildID = message.guild.id;
 

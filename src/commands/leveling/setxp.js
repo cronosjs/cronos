@@ -1,7 +1,7 @@
 module.exports = {
   name: "setxp",
+  category: "leveling",
   async execute(client, message, args) {
-
     if (!message.member.permissions.has("MANAGE_GUILD")) {
       return message.channel.send("Ey ey ey! You can't use that command");
     }

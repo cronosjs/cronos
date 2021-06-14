@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 module.exports = {
   name: "rank",
+  category: "leveling",
   async execute(client, message, args) {
     // user who will get the xp
     let target = message.mentions.users.first()

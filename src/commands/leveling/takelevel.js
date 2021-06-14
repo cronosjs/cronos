@@ -1,6 +1,7 @@
 module.exports = {
   name: "takelevel",
   aliases: ["substractlevel"],
+  category: "leveling",
   async execute(client, message, args) {
     if (!message.member.permissions.has("MANAGE_GUILD")) {
       return message.channel.send("Ey ey ey! You can't use that command");
@@ -38,8 +39,8 @@ module.exports = {
       ? `Successfully removed **${level}** levels from **${target.username}**'s level`
       : `Successfully removed **${level}** levels from your level`;
 
-      client.xp.subtractLevel(guildID, target.id, level).then(() => {
-        return message.channel.send(done);
-      });
+    client.xp.subtractLevel(guildID, target.id, level).then(() => {
+      return message.channel.send(done);
+    });
   },
 };

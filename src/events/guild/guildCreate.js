@@ -1,4 +1,4 @@
-const guildDoc = require("../models/guild");
+const guildDoc = require("../../models/guild");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = async (guild, client) => {
