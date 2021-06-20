@@ -8,22 +8,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elttayman-Co/Cronos.git"
+    "url": "git+https://github.com/cronos-team/cronos.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/elttayman-Co/Cronos/issues"
+    "url": "https://github.com/cronos-team/cronos/issues"
   },
-  "homepage": "https://github.com/elttayman-Co/Cronos#readme",
+  "homepage": "https://github.com/cronos-team/cronos#readme",
   "dependencies": {
     "canvas": "^2.8.0",
     "chalk": "^4.1.1",
-    "cronos-xp": "^1.0.4",
+    "cronos-xp": "^1.0.5",
     "discord-buttons": "^3.2.1",
     "discord.js": "^12.5.3",
     "dotenv": "^9.0.2",
-    "memer-api": "^3.0.0-beta.0",
+    "memer-api": "^3.0.2",
     "mongoose": "^5.12.9"
   }
 }
