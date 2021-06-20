@@ -1,4 +1,4 @@
-let GameManager = require("../../resource/managers/Game.js")
+let GameManager = require("./Game.js")
 const {MessageEmbed} = require("discord.js");
 const {MessageButton, MessageActionRow} = require("discord-buttons");
 
@@ -32,12 +32,11 @@ module.exports = {
                 .setTitle(`Black Jack`)
                 .addField(message.author.username, `Hand: \`${beforeObject.playerHand.join(`\` \``)}\`\nTotal: ${GameManager.getHandTotal(beforeObject.playerHand)}`, true)
                 .addField(client.user.username, `Hand: \`${beforeObject.dealerHand.join(`\` \``)}\`\nTotal: ${GameManager.getHandTotal(beforeObject.dealerHand)}`, true)
-                .setFooter(`Possible moves: ${beforeObject.possibleActions.join(", ")}`)
         }
 
         const stay = new MessageButton()
             .setStyle(1)
-            .setLabel("Stay")
+            .setLabel("Stand")
             .setID("stay")
 
         const hit = new MessageButton()
@@ -80,7 +79,7 @@ module.exports = {
                     });
                     collector.on('end', collected => {
                         if(collected.size <= 0){
-                            message.channel.send("You didn't do anything so you automatically stayed.")
+                            message.channel.send("You didn't do anything so you automatically stand.")
                             resolve("stay")
                         }
                     });
