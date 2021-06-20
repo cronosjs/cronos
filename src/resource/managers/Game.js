@@ -1,4 +1,4 @@
-const Deck = require("./FrenchDeck.js")
+const Deck = require("../decks/FrenchDeck.js")
 
 colors = {
     win: "#1de031",

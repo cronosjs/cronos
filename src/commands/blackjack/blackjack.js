@@ -1,4 +1,4 @@
-let GameManager = require("./Game.js")
+let GameManager = require("../../resource/managers/Game.js")
 const {MessageEmbed} = require("discord.js");
 const {MessageButton, MessageActionRow} = require("discord-buttons");
 
