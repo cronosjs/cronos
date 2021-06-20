@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const guild = new mongoose.Schema(
   {
-    Guild: String,
-    Prefix: String,
+    _id: String,
+    prefix: String,
     wcChannel: String,
     lvlChannel: String,
     logChannel: String,

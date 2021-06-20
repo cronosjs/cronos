@@ -26,7 +26,7 @@ module.exports = async (message, client) => {
 
   // check if level up channel is enabled in the guild
   const sDoc = await guildDoc.findOne({
-    Guild: message.guild.id,
+    _id: message.guild.id,
   });
 
   if (sDoc) {

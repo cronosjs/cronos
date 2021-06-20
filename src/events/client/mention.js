@@ -7,10 +7,10 @@ module.exports = async (message, client) => {
     return;
 
   const sDoc = await guildDoc.findOne({
-    Guild: message.guild.id,
+    _id: message.guild.id,
   });
 
-  let p = sDoc.Prefix ? sDoc.Prefix : client.prefix;
+  let p = sDoc ? sDoc.prefix : client.prefix;
 
   
   // mentioned bot

@@ -17,12 +17,12 @@ function loadEvents(client) {
   client.on("message", (m) => guildEvent("message")(m, cooldowns));
 
   // other events
+  client.on("message", (m) => otherEvent("checkGuild")(m, client));
   client.on("message", (m) => otherEvent("leveling")(m, client));
 
   // warnings and errors
   client.on("warn", (info) => console.log(info));
   client.on("error", console.error);
-  client.on("unhandledRejection", console.error);
 }
 
 module.exports = {

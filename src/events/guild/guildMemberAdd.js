@@ -12,7 +12,7 @@ module.exports = async (member, client) => {
   await client.xp.createUser(guildID, member.id);
 
   const sDoc = await guildDoc.findOne({
-    Guild: member.guild.id,
+    _id: member.guild.id,
   });
 
   if (sDoc) {

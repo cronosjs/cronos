@@ -10,6 +10,7 @@ const { Client, Collection, Intents } = require("discord.js");
 const { loadCommands } = require("./utilities/loadcmds.js");
 const { loadEmojis } = require("./utilities/loademojis.js");
 const { loadEvents } = require("./utilities/loadevents.js");
+const { nodeEvents } = require("./utilities/nodeevents.js");
 
 const client = new Client({
   allowedMentions: { parse: ["users", "roles"] },
@@ -41,13 +42,14 @@ client.login(process.env.main_token).then(() => {
 });
 
 client.xp = Level;
-client.images = cronosImg
+client.images = cronosImg;
 client.prefix = prefix;
 client.support = support_server;
 client.myemojis = new Collection();
 client.commands = new Collection();
 
-require("discord-buttons")(client)
+require("discord-buttons")(client);
 loadCommands(client);
 loadEvents(client);
-loadEmojis(client)
+loadEmojis(client);
+nodeEvents(process);

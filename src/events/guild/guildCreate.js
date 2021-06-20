@@ -5,8 +5,8 @@ module.exports = async (guild, client) => {
   await client.xp.createGuild(guild.id);
 
   const sb = new guildDoc({
-    Guild: guild.id,
-    Prefix: client.prefix,
+    _id: guild.id,
+    prefix: client.prefix,
   });
 
   await sb.save().catch((err) => console.log(err));

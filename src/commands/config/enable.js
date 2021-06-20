@@ -15,7 +15,7 @@ module.exports = {
     const type = input.toLowerCase();
 
     const sDoc = await guildDoc.findOne({
-      Guild: message.guild.id,
+      _id: message.guild.id,
     });
 
     if (!cat) return message.reply("Please specify the category");
