@@ -1,4 +1,4 @@
-const Deck = require("../decks/FrenchDeck.js")
+const Deck = require("../../resource/decks/FrenchDeck.js")
 
 colors = {
     win: "#1de031",
@@ -156,56 +156,32 @@ class GameManager {
 
     static #checkBlackjack(hand) {
         return (
-            hand[0].startsWith("A") && (hand[1].startsWith("10") || hand[1].startsWith("J") || hand[1].startsWith("Q") || hand[1].startsWith("K")))
-            || ((hand[1].startsWith("10") || hand[0].startsWith("J") || hand[0].startsWith("Q") || hand[0].startsWith("K")) && hand[1].startsWith("A"));
+            hand[0].startsWith("A") && (hand[1].startsWith("1") || hand[1].startsWith("J") || hand[1].startsWith("Q") || hand[1].startsWith("K")))
+            || ((hand[1].startsWith("1") || hand[0].startsWith("J") || hand[0].startsWith("Q") || hand[0].startsWith("K")) && hand[1].startsWith("A"));
     }
 
     static getHandTotal(hand) {
         let total = 0;
         let aces = 0;
+        let values = {
+            "A": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "1": 10,
+            "J": 10,
+            "Q": 10,
+            "K": 10,
+        }
         hand.forEach(card => {
-            switch (card.charAt(0)) {
-                case "A":
-                    total += 1;
-                    aces += 1
-                    break;
-                case "2":
-                    total += 2;
-                    break;
-                case "3":
-                    total += 3;
-                    break;
-                case "4":
-                    total += 4;
-                    break;
-                case "5":
-                    total += 5;
-                    break;
-                case "6":
-                    total += 6;
-                    break;
-                case "7":
-                    total += 7;
-                    break;
-                case "8":
-                    total += 8;
-                    break;
-                case "9":
-                    total += 9;
-                    break;
-                case "1":
-                    total += 10;
-                    break;
-                case "J":
-                    total += 10;
-                    break;
-                case "Q":
-                    total += 10;
-                    break;
-                case "K":
-                    total += 10;
-                    break;
-            }
+            card = card.charAt(0)
+            total += values[card]
+            if(card === "A") aces += 1
         });
         for (let i = 0; i < aces; i++) {
             if (total <= 11) {
