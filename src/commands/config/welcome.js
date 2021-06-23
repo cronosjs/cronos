@@ -1,7 +1,6 @@
 const guildDoc = require("../../models/guild");
 
 /**
- * TODO: Put more valid image extensions (see line 41)
  * TODO: Add feature so people in welcome message can set where the bot mentions the new user
  * example: c/welcome message Welcome {username} to the server
  * TODO: Posibility to mention channel instead of message.channel 
@@ -42,8 +41,6 @@ module.exports = {
     }
     if (cat === "image") {
       if (!input) return message.reply(`Please insert the image url`);
-      if (!input.includes(".jpg" || ".png" || ".jpeg"))
-        return message.reply("Please insert a valid image url");
 
       sDoc.welcome.image = input;
 

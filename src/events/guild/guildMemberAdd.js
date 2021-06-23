@@ -27,7 +27,7 @@ module.exports = async (member, client) => {
       }
 
       if (!message && image) {
-        let username = member.user.username;
+        let username = member.user.tag;
         let avatar = member.user.displayAvatarURL({ format: "png" });
         let background = image;
 
