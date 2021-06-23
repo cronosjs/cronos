@@ -28,10 +28,10 @@ module.exports = {
       if (!type) return message.reply("Please specify the type of channel");
 
       if (type === "welcome") {
-        let wcCh = sDoc.wcChannel;
+        let wcCh = sDoc.welcome.channel;
 
         if (wcCh) {
-          sDoc.wcChannel = channelId;
+          sDoc.welcome.channel = channelId;
 
           await sDoc.save().catch((err) => console.log(err));
 
@@ -39,7 +39,7 @@ module.exports = {
             `Welcome messages have been moved in ${channel}\nTo edit the welcome image/message, use ${prefix}edit welcome <message | image>`
           );
         } else {
-          sDoc.wcChannel = channelId;
+          sDoc.welcome.channel = channelId;
 
           await sDoc.save().catch((err) => console.log(err));
 
@@ -48,25 +48,15 @@ module.exports = {
           );
         }
       } else if (type === "level up") {
-        let lvlCh = sDoc.lvlChannel;
+        let lvlCh = sDoc.lvl.channel;
 
-        if (lvlCh) {
-          sDoc.lvlChannel = channelId;
+        sDoc.lvl.channel = channelId;
+        await sDoc.save().catch((err) => console.log(err));
 
-          await sDoc.save().catch((err) => console.log(err));
-
-          return message.reply(
-            `Level up messages have been moved in ${channel}\nTo edit the level up message, use ${prefix}edit levelup <message>`
-          );
-        } else {
-          sDoc.lvlChannel = channelId;
-
-          await sDoc.save().catch((err) => console.log(err));
-
-          return message.reply(
-            `Level up messages have been enabled in ${channel}\nTo edit the level up message, use ${prefix}edit levelup <message>`
-          );
-        }
+        let msg = lvlCh
+          ? `Level up messages have been moved in ${channel}\nTo edit the level up message, use ${prefix}edit levelup <message>`
+          : `Level up messages have been enabled in ${channel}\nTo edit the level up message, use ${prefix}edit levelup <message>`;
+        return message.reply(msg);
       }
     }
   },

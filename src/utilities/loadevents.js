@@ -9,11 +9,14 @@ function loadEvents(client) {
   // client events
   client.on("ready", () => clientEvent("ready")(client));
   client.on("message", (m) => clientEvent("mention")(m, client));
+  client.on("guildCreate", (g) => clientEvent("joinGuild")(g, client));  
+  client.on("guildDelete", (g) => clientEvent("leftGuild")(g, client));  
 
   // guild events
   client.on("guildCreate", (g) => guildEvent("guildCreate")(g, client));
   client.on("guildDelete", (g) => guildEvent("guildDelete")(g, client));
-  client.on("guildMemberAdd", (m) => guildEvent("guildMemberAdd")(m, client));
+  client.on("guildMemberAdd", (m) => guildEvent("guildMemberAdd")(m, client));  
+  client.on("guildMemberRemove", (m) => guildEvent("guildMemberRemove")(m, client));
   client.on("message", (m) => guildEvent("message")(m, cooldowns));
 
   // other events

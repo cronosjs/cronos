@@ -1,5 +1,6 @@
 module.exports = {
   name: "addlevel",
+  category: "leveling",
   userPerms: ["MANAGE_GUILD"],
   async execute(client, message, args) {
     // levels wanted to add

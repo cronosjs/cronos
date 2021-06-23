@@ -16,19 +16,35 @@ module.exports = async (member, client) => {
   });
 
   if (sDoc) {
-    let wcCh = sDoc.wcChannel;
+    let wcCh = sDoc.welcome.channel;
+    let message = sDoc.welcome.message;
+    let image = sDoc.welcome.image;
 
     if (wcCh) {
       let channel = client.channels.cache.get(wcCh);
+      if (message && !image) {
+        channel.send(message);
+      }
 
-      let username = member.user.username;
-      let avatar = member.user.displayAvatarURL({ format: "png" });
-      let background =
-        "https://media.discordapp.net/attachments/841771737666682920/853946945255899136/gradient.png?width=677&height=473";
+      if (!message && image) {
+        let username = member.user.username;
+        let avatar = member.user.displayAvatarURL({ format: "png" });
+        let background = image;
 
-      let img = await memer.welcome(username, avatar, background);
-      let attach = new Discord.MessageAttachment(img, "welcome.png");
-      channel.send(attach);
+        let img = await memer.welcome(username, avatar, background);
+        let attach = new Discord.MessageAttachment(img, "welcome.png");
+        channel.send(attach);
+      }
+
+      if (message && image) {
+        let username = member.user.username;
+        let avatar = member.user.displayAvatarURL({ format: "png" });
+        let background = image;
+
+        let img = await memer.welcome(username, avatar, background);
+        let attach = new Discord.MessageAttachment(img, "welcome.png");
+        channel.send(message, attach);
+      }
     }
   }
 };

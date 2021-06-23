@@ -29,7 +29,7 @@ function nodeEvents(process) {
   });
   process.on("multipleResolves", (type, promise, reason) => {
     console.log(
-      `NODE EVENT: Resolved multiple times a process action:${
+      `NODE EVENT: Resolved multiple times a process action: ${
         (type, promise, reason)
       }`
     );

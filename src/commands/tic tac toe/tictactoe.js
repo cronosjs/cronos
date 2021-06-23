@@ -244,6 +244,8 @@ module.exports = {
       let dbLose =
         winner === message.author.id ? opponent.id : message.author.id;
 
+        
+      // send game logs if enabled
       let ttWin = await player.findOne({
         _id: dbWin,
       });
