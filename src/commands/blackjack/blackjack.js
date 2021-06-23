@@ -9,6 +9,7 @@ const { MessageButton, MessageActionRow } = require("discord-buttons");
 module.exports = {
   name: "blackjack",
   aliases: ["bj"],
+  botPerms: ["EMBED_LINKS"],
   async execute(client, message, args) {
     if (!parseInt(args[0])) {
       return message.channel.send("Invalid bet");

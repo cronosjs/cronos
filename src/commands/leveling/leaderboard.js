@@ -4,6 +4,7 @@ module.exports = {
   name: "leaderboard",
   aliases: ["lb", "topxp"],
   category: "leveling",
+  botPerms: ["EMBED_LINKS"],
   async execute(client, message, args) {
     let guildID = message.guild.id;
 

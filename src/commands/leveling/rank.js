@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 module.exports = {
   name: "rank",
   category: "leveling",
+  botPerms: ["ATTACH_FILES"],
   async execute(client, message, args) {
     // user who will get the xp
     let target = message.mentions.users.first()
@@ -15,7 +16,7 @@ module.exports = {
     let userRank = await client.xp.getUserRank(guildID, target.id);
 
     let avatar = target.displayAvatarURL({ format: "png" });
-    let rank = checkUser ? userRank : 0
+    let rank = checkUser ? userRank : 0;
     let level = checkUser ? user.level : 0;
     let currentXp = checkUser ? user.xp : 0;
     let nextXp = await client.xp.xpForNext(currentXp);

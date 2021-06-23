@@ -4,6 +4,7 @@ const player = require("../../models/player");
 module.exports = {
   name: "tictactoe",
   aliases: ["ttt"],
+  botPerms: ["USE_EXTERNAL_EMOJIS"],
   async execute(client, message, args) {
     // 2nd fighter (1st is msg author)
     let opponent =

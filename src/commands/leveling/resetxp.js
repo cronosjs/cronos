@@ -1,11 +1,8 @@
 module.exports = {
   name: "resetxp",
   category: "leveling",
+  userPerms: ["MANAGE_GUILD"],
   async execute(client, message, args) {
-    if (!message.member.permissions.has("MANAGE_GUILD")) {
-      return message.channel.send("Ey ey ey! You can't use that command");
-    }
-
     // user who will lose the xp
     let target = message.mentions.users.first()
       ? message.mentions.users.first()

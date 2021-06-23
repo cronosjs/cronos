@@ -2,11 +2,8 @@ module.exports = {
   name: "takelevel",
   aliases: ["substractlevel"],
   category: "leveling",
+  userPerms: ["MANAGE_GUILD"],
   async execute(client, message, args) {
-    if (!message.member.permissions.has("MANAGE_GUILD")) {
-      return message.channel.send("Ey ey ey! You can't use that command");
-    }
-
     // levels wanted to add
     let level = message.mentions.users.first()
       ? args.slice(1).join(" ")

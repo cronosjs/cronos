@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const guildDoc = require("../../models/guild");
+const { readTime } = require("../../resource/functions/readtime")
 
 module.exports = async (message, cooldowns) => {
   if (message.author.bot) return;
@@ -29,6 +30,16 @@ module.exports = async (message, cooldowns) => {
 
   if (!command) return;
 
+  // user permissions handler
+  if (!message.member.permissions.has(command.userPerms || []))
+    return message.channel.send("Ey ey ey! You can't use that command");
+
+  // bot permissions handler
+  if (!message.guild.me.permissions.has(command.botPerms || []))
+    return message.channel.send(
+      `Ups :/  I need ${command.botPerms} to run this command correctly`
+    );
+
   // cooldowns
   if (!cooldowns.has(command.name)) {
     cooldowns.set(command.name, new Discord.Collection());
@@ -44,21 +55,6 @@ module.exports = async (message, cooldowns) => {
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
 
-      function readTime(t) {
-        let s = t % 60;
-        t -= s;
-        let m = (t / 60) % 60;
-        t -= m * 60;
-        let h = (t / 3600) % 24;
-
-        if (m <= 0) {
-          return `${s} seconds`;
-        } else if (h <= 0) {
-          return `${m} min`;
-        } else {
-          return `${h}h`;
-        }
-      }
       const tleft1 = Math.round(timeLeft.toFixed(3));
       let tleft = readTime(tleft1);
 
