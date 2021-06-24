@@ -11,6 +11,7 @@ const { loadCommands } = require("./utilities/loadcmds.js");
 const { loadEmojis } = require("./utilities/loademojis.js");
 const { loadEvents } = require("./utilities/loadevents.js");
 const { nodeEvents } = require("./utilities/nodeevents.js");
+const { loadSlash } = require("./utilities/loadslash.js");
 
 const client = new Client({
   allowedMentions: { parse: ["users", "roles"] },
@@ -45,10 +46,12 @@ client.xp = Level;
 client.images = cronosImg;
 client.prefix = prefix;
 client.support = support_server;
+client.slash = new Collection();
 client.myemojis = new Collection();
 client.commands = new Collection();
 
-loadCommands(client);
 loadEvents(client);
+loadCommands(client);
 loadEmojis(client);
+loadSlash(client);
 nodeEvents(process);

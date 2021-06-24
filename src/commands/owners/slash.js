@@ -10,27 +10,8 @@ module.exports = {
     ) {
       //slash cmd template
       const data = {
-        name: "name",
-        description: "description",
-        options: [
-          {
-            name: "name",
-            type: Number, // check the bottom of this file
-            description: "description",
-            required: true, // set to false if optional
-            choices: [
-              {
-                name: "name",
-                value: "value",
-              },
-            ],
-            options: [
-              {
-                // ....
-              },
-            ],
-          },
-        ],
+        name: "ping",
+        description: "Check bot's response time to Discord",
       };
 
       const command = await client.application?.commands.create(data);
