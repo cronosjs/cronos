@@ -32,11 +32,11 @@ module.exports = async (message, cooldowns) => {
 
   // user permissions handler
   if (!message.member.permissions.has(command.userPerms || []))
-    return message.channel.send("Ey ey ey! You can't use that command");
+    return message.reply("Ey ey ey! You can't use that command");
 
   // bot permissions handler
   if (!message.guild.me.permissions.has(command.botPerms || []))
-    return message.channel.send(
+    return message.reply(
       `Ups :/  I need ${command.botPerms} to run this command correctly`
     );
 
@@ -58,8 +58,8 @@ module.exports = async (message, cooldowns) => {
       const tleft1 = Math.round(timeLeft.toFixed(3));
       let tleft = readTime(tleft1);
 
-      return message.channel
-        .send(`Please wait ${tleft} before using \`${command.name}\` again.`)
+      return message
+        .reply(`Please wait ${tleft} before using \`${command.name}\` again.`)
         .then((msg) => {
           msg.delete({ timeout: 5000 });
         });

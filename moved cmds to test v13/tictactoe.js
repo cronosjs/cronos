@@ -1,5 +1,5 @@
 let { MessageButton, MessageActionRow } = require("discord-buttons");
-const player = require("../../models/player");
+const player = require("../src/models/player");
 
 module.exports = {
   name: "tictactoe",
@@ -12,7 +12,7 @@ module.exports = {
       message.guild.members.cache.get(args[0]);
 
     if (!opponent)
-      return message.channel.send("Please provide the user to challenge!");
+      return message.reply("Please provide the user to challenge!");
 
     // choose randomly who is going to start
     let fighters = [message.author.id, opponent.id].sort(() =>

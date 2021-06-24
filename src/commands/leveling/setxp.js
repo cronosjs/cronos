@@ -5,7 +5,8 @@ module.exports = {
   async execute(client, message, args) {
     // xp wanted to set
     let xp = message.mentions.users.first() ? args.slice(1).join(" ") : args[0];
-
+    if (!xp) return message.reply("Please insert the xp you want to set");
+    
     // user who will get the xp
     let target = message.mentions.users.first()
       ? message.mentions.users.first()

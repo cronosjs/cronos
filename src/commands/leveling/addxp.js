@@ -5,7 +5,7 @@ module.exports = {
   async execute(client, message, args) {
     // xp wanted to add
     let xp = message.mentions.users.first() ? args.slice(1).join(" ") : args[0];
-
+    if(!xp) return message.reply("Please insert the xp you want to add")
     // user who will get the xp
     let target = message.mentions.users.first()
       ? message.mentions.users.first()
@@ -24,7 +24,7 @@ module.exports = {
     client.xp
       .addXp(guildID, target.id, xp)
       .then(() => {
-        return message.channel.send(done);
+        return message.reply(done);
       })
       .catch(async (error) => {
         if (error) {
@@ -33,10 +33,10 @@ module.exports = {
             client.xp
               .addXp(guildID, target.id, xp)
               .then((result) => {
-                return message.channel.send(done);
+                return message.reply(done);
               })
               .catch((error) => {
-                return message.channel.send(`**Error:** ${error}`);
+                return message.reply(`**Error:** ${error}`);
               });
           }
         }

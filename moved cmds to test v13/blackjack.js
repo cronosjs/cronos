@@ -1,4 +1,4 @@
-let GameManager = require("./Game.js");
+let GameManager = require("../src/commands/blackjack/Game.js");
 const { MessageEmbed } = require("discord.js");
 const { MessageButton, MessageActionRow } = require("discord-buttons");
 
@@ -12,7 +12,7 @@ module.exports = {
   botPerms: ["EMBED_LINKS"],
   async execute(client, message, args) {
     if (!parseInt(args[0])) {
-      return message.channel.send("Invalid bet");
+      return message.reply("Invalid bet");
     }
 
     const bet = Math.ceil(parseInt(args[0]));
@@ -115,7 +115,7 @@ module.exports = {
           });
           collector.on("end", (collected) => {
             if (collected.size <= 0) {
-              message.channel.send(
+              message.reply(
                 "You didn't do anything so you automatically stand."
               );
               resolve("stay");

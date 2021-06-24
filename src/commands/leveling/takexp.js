@@ -6,6 +6,7 @@ module.exports = {
   async execute(client, message, args) {
     // xp wanted to substract
     let xp = message.mentions.users.first() ? args.slice(1).join(" ") : args[0];
+    if(!xp) return message.reply("Please insert the xp you want to substract")
 
     // user who will lose the xp
     let target = message.mentions.users.first()
@@ -15,12 +16,12 @@ module.exports = {
     let guildID = message.guild.id;
 
     let guild = await client.xp.isGuild(guildID);
-    if (!guild) return message.reply();
+    if (!guild) return message.reply("Cri cri... No one has xp in this server!");
 
     let userID = target.id;
 
     let user = await client.xp.isUser(guildID, userID);
-    if (!user) return message.reply();
+    if (!user) return message.reply("Cri cri... This user doesn't have xp");
 
     // check if xp wanted to substract is bigger than user's xp
     let checkXp = await client.xp.getUser(guildID, userID);
@@ -35,7 +36,7 @@ module.exports = {
       : `Successfully removed **${xp}** xp from your xp`;
 
     client.xp.subtractXp(guildID, target.id, xp).then(() => {
-      return message.channel.send(done);
+      return message.reply(done);
     });
   },
 };

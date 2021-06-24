@@ -7,6 +7,7 @@ module.exports = {
     let level = message.mentions.users.first()
       ? args.slice(1).join(" ")
       : args[0];
+    if(!level) return message.reply("Please insert the level you want to set")
 
     // user who will get the levels
     let target = message.mentions.users.first()
@@ -26,7 +27,7 @@ module.exports = {
     client.xp
       .setLevel(guildID, target.id, level)
       .then(() => {
-        return message.channel.send(done);
+        return message.reply(done);
       })
       .catch(async (error) => {
         if (error) {
@@ -35,10 +36,10 @@ module.exports = {
             client.xp
               .setLevel(guildID, target.id, level)
               .then((result) => {
-                return message.channel.send(done);
+                return message.reply(done);
               })
               .catch((error) => {
-                return message.channel.send(`**Error:** ${error}`);
+                return message.reply(`**Error:** ${error}`);
               });
           }
         }
