@@ -1,6 +1,5 @@
-let GameManager = require("../src/commands/blackjack/Game.js");
-const { MessageEmbed } = require("discord.js");
-const { MessageButton, MessageActionRow } = require("discord-buttons");
+let GameManager = require("./Game.js");
+const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
 
 /**
  * TODO: Add points and eco stuff here
@@ -67,22 +66,22 @@ module.exports = {
     const stay = new MessageButton()
       .setStyle(1)
       .setLabel("Stand")
-      .setID("stay");
+      .setCustomID("stay");
 
     const hit = new MessageButton()
-      .setStyle("green")
+      .setStyle(3)
       .setLabel("Hit")
-      .setID("hit");
+      .setCustomID("hit");
 
     const double = new MessageButton()
-      .setStyle("green")
+      .setStyle(3)
       .setLabel("Double")
-      .setID("double");
+      .setCustomID("double");
 
     const surrender = new MessageButton()
-      .setStyle("red")
+      .setStyle(4)
       .setLabel("Surrender")
-      .setID("surrender");
+      .setCustomID("surrender");
 
     let defaultButtons = new MessageActionRow().addComponents([stay, hit]);
     let firstOnlyButtons = new MessageActionRow().addComponents([
@@ -97,21 +96,24 @@ module.exports = {
       await message.channel.send({ embed: createFinish(currentState) });
     } else {
       let table = await message.channel.send({
-        embed: createRequestInput(currentState),
+        embeds: [createRequestInput(currentState)],
         components: [defaultButtons, firstOnlyButtons],
       });
       async function awaitInput() {
         return new Promise((resolve) => {
-          const filter = (button) =>
-            button.clicker.user.id === message.author.id;
-          const collector = table.createButtonCollector(filter, {
-            max: 1,
-            time: 30000,
-          });
+          const filter = (interaction) =>
+            interaction.user.id === message.author.id;
+          const collector = table.createMessageComponentInteractionCollector(
+            filter,
+            {
+              max: 1,
+              time: 30000,
+            }
+          );
 
           collector.on("collect", (collected) => {
             collected.defer();
-            resolve(collected.id);
+            resolve(collected.customID);
           });
           collector.on("end", (collected) => {
             if (collected.size <= 0) {

@@ -1,6 +1,5 @@
 module.exports = async (interaction, client) => {
   if (!interaction.isCommand()) return;
-
   const commandName = interaction.commandName;
 
   const command = client.slash.get(commandName);
@@ -10,7 +9,7 @@ module.exports = async (interaction, client) => {
     command.execute(client, interaction);
   } catch (error) {
     console.error(error);
-    message.channel
+    interaction.reply
       .send("There was an error executing that command.")
       .then((msg) => {
         setTimeout(() => {
