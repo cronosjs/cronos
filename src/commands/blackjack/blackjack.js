@@ -93,7 +93,7 @@ module.exports = {
     let currentState = game.start();
 
     if (currentState.hasOwnProperty("result")) {
-      await message.channel.send({ embed: createFinish(currentState) });
+      await message.channel.send({ embeds: [createFinish(currentState)] });
     } else {
       let table = await message.channel.send({
         embeds: [createRequestInput(currentState)],
@@ -130,15 +130,15 @@ module.exports = {
           switch (next) {
             case "stay":
               currentState = game.stay();
-              table.edit({ embed: createFinish(currentState) });
+              table.edit({ embeds: [createFinish(currentState)] });
               break;
             case "hit":
               currentState = game.hit();
               if (currentState.hasOwnProperty("result")) {
-                table.edit({ embed: createFinish(currentState) });
+                table.edit({ embeds: [createFinish(currentState)] });
               } else {
                 table.edit({
-                  embed: createRequestInput(currentState),
+                  embeds: [createRequestInput(currentState)],
                   components: [defaultButtons],
                 });
                 resolveInput();
@@ -146,11 +146,11 @@ module.exports = {
               break;
             case "double":
               currentState = game.double();
-              table.edit({ embed: createFinish(currentState) });
+              table.edit({ embeds: [createFinish(currentState)] });
               break;
             case "surrender": {
               currentState = game.surrender();
-              table.edit({ embed: createFinish(currentState) });
+              table.edit({ embeds: [createFinish(currentState)] });
               break;
             }
           }
