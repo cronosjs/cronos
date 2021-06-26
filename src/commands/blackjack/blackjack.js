@@ -112,7 +112,8 @@ module.exports = {
           );
 
           collector.on("collect", (collected) => {
-            collected.defer();
+            collected.reply(client.myemojis.get("invisible"));
+            collected.deleteReply();
             resolve(collected.customID);
           });
           collector.on("end", (collected) => {
@@ -130,12 +131,18 @@ module.exports = {
           switch (next) {
             case "stay":
               currentState = game.stay();
-              table.edit({ embeds: [createFinish(currentState)] });
+              table.edit({
+                embeds: [createFinish(currentState)],
+                components: [],
+              });
               break;
             case "hit":
               currentState = game.hit();
               if (currentState.hasOwnProperty("result")) {
-                table.edit({ embeds: [createFinish(currentState)] });
+                table.edit({
+                  embeds: [createFinish(currentState)],
+                  components: [],
+                });
               } else {
                 table.edit({
                   embeds: [createRequestInput(currentState)],
@@ -150,7 +157,10 @@ module.exports = {
               break;
             case "surrender": {
               currentState = game.surrender();
-              table.edit({ embeds: [createFinish(currentState)] });
+              table.edit({
+                embeds: [createFinish(currentState)],
+                components: [],
+              });
               break;
             }
           }
