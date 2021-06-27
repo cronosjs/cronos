@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cronos-team/cronos.git"
+    "url": "git+https://github.com/cronosjs/cronos.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cronos-team/cronos/issues"
+    "url": "https://github.com/cronosjs/cronos/issues"
   },
-  "homepage": "https://github.com/cronos-team/cronos#readme",
+  "homepage": "https://github.com/cronosjs/cronos#readme",
   "dependencies": {
     "bufferutil": "^4.0.3",
     "canvas": "^2.8.0",
