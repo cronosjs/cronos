@@ -17,12 +17,14 @@
   },
   "homepage": "https://github.com/cronos-team/cronos#readme",
   "dependencies": {
+    "bufferutil": "^4.0.3",
     "canvas": "^2.8.0",
     "chalk": "^4.1.1",
     "cronos-xp": "^1.0.5",
     "discord.js": "^13.0.0-dev.e0efcc6ab0e3f060e30438c0d990c9465c6134df",
     "dotenv": "^9.0.2",
     "memer-api": "^3.0.2",
-    "mongoose": "^5.12.9"
+    "mongoose": "^5.12.9",
+    "utf-8-validate": "^5.0.5"
   }
 }
