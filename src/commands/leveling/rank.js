@@ -12,6 +12,7 @@ module.exports = {
     let guildID = message.guild.id;
 
     let checkUser = await client.xp.isUser(guildID, target.id);
+    if(!checkUser) await client.xp.createUser(guildID, target.id);
     let user = await client.xp.getUser(guildID, target.id);
     let userRank = await client.xp.getUserRank(guildID, target.id);
 
