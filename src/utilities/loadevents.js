@@ -8,7 +8,7 @@ function loadEvents(client) {
 
   // client events
   client.on("ready", () => clientEvent("ready")(client));
-  client.on("message", (m) => clientEvent("mention")(m, client));
+  client.on("messageCreate", (m) => clientEvent("mention")(m, client));
   client.on("guildCreate", (g) => clientEvent("joinGuild")(g, client));
   client.on("guildDelete", (g) => clientEvent("leftGuild")(g, client));
 
@@ -19,12 +19,12 @@ function loadEvents(client) {
   client.on("guildMemberRemove", (m) =>
     guildEvent("guildMemberRemove")(m, client)
   );
-  client.on("message", (m) => guildEvent("message")(m, cooldowns));
+  client.on("messageCreate", (m) => guildEvent("message")(m, cooldowns));
 
   // other events
-  client.on("message", (m) => otherEvent("checkGuild")(m, client));
-  client.on("message", (m) => otherEvent("leveling")(m, client));
-  client.on("interaction", (i) => otherEvent("interaction")(i, client));
+  client.on("messageCreate", (m) => otherEvent("checkGuild")(m, client));
+  client.on("messageCreate", (m) => otherEvent("leveling")(m, client));
+  client.on("interactionCreate", (i) => otherEvent("interaction")(i, client));
 
   // warnings and errors
   client.on("warn", (info) => console.log(info));

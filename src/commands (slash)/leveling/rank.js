@@ -3,13 +3,13 @@ module.exports = {
   name: "rank",
   category: "leveling",
   botPerms: ["ATTACH_FILES"],
-  async execute(client, message, args) {
-    // user who will get the xp
-    let target = message.mentions.users.first()
-      ? message.mentions.users.first()
-      : message.author;
+  async execute(client, cmd) {
+    // user you want to see it's rank
+    let target = cmd.options.get("user")
+      ? cmd.options.get("user").user
+      : cmd.user;
 
-    let guildID = message.guild.id;
+    let guildID = cmd.guildId;
 
     let checkUser = await client.xp.isUser(guildID, target.id);
     let user = await client.xp.getUser(guildID, target.id);
@@ -37,6 +37,6 @@ module.exports = {
       "rank.png"
     );
 
-    message.channel.send({ files: [attachment] });
+    cmd.reply({ files: [attachment] });
   },
 };

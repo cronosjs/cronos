@@ -4,7 +4,7 @@ const chalk = require("chalk");
 const CronosXp = require("cronos-xp");
 const cronosImg = require("../cronos-images/src/index");
 
-const { prefix, support_server } = require("./json/config.json");
+const { prefix, support_server, invite_url } = require("./json/config.json");
 const { Client, Collection, Intents } = require("discord.js");
 
 const { loadCommands } = require("./utilities/loadcmds.js");
@@ -46,6 +46,7 @@ client.xp = Level;
 client.images = cronosImg;
 client.prefix = prefix;
 client.support = support_server;
+client.invite = invite_url
 client.slash = new Collection();
 client.myemojis = new Collection();
 client.commands = new Collection();

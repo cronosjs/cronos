@@ -2,7 +2,7 @@ const chalk = require("chalk");
 const mongoose = require("mongoose");
 
 module.exports = (client) => {
-  client.user.setActivity("@cronos", { type: "WATCHING" });
+  client.user.setActivity("/cronos", { type: "WATCHING" });
 
   let allMembers = new Set();
   client.guilds.cache.forEach((guild) => {

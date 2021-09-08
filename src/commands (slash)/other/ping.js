@@ -1,11 +1,11 @@
 module.exports = {
   name: "ping",
-  async execute(client, interaction) {
+  async execute(client, cmd) {
     let oldate = new Date().getMilliseconds();
     let newtime = new Date().getMilliseconds() - oldate;
 
-    await interaction.reply("**:ping_pong: Pong!**");
-    interaction.editReply(
+    await cmd.reply("**:ping_pong: Pong!**");
+    cmd.editReply(
       ` **:ping_pong: Pong!**\n\n:hourglass: ${
         client.ws.ping
       }ms\n\n:stopwatch: ${

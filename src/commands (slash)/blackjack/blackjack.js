@@ -4,8 +4,7 @@ const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
 module.exports = {
   name: "blackjack",
   async execute(client, cmd) {
-    const { value: integer } = cmd.options.get("bet");
-    const bet = integer;
+    const { value: bet } = cmd.options.get("bet");
 
     function createFinish(finishObject) {
       return new MessageEmbed()

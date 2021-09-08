@@ -23,7 +23,7 @@ module.exports = async (guild, client) => {
       )}`
     )
     .setDescription(
-      `- My default prefix is \`${client.prefix}\`\r\n\r\n- To change my prefix type \`${client.prefix}prefix <prefix>\`\r\n\r\n- Type \`${client.prefix}help\` to get a list of avaliable commands\r\n\r\n- Feel free to join our support server if you need help [Click here!!](\`${client.support}\`)`
+      `- My default prefix is \`${client.prefix}\`\r\n\r\n- To change my prefix type \`${client.prefix}prefix <prefix>\`\r\n\r\n- Type \`${client.prefix}help\` to get a list of avaliable commands\r\n\r\n- Feel free to join our support server if you need help [Click here!!](${client.support})`
     );
   channel.send(newEmbed);
 };
