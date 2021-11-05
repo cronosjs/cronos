@@ -1,29 +1,35 @@
-const guildDoc = require("../../models/guild");
-const { MessageEmbed } = require("discord.js");
+const { embed } = require("../../utils/Utils");
+module.exports = class guildCreate extends Event {
+  constructor() {
+    super({
+      name: "guildCreate",
+      once: false,
+    });
+  }
+  async exec(guild) {
+    await this.client.xp.createGuild(guild.id);
 
-module.exports = async (guild, client) => {
-  await client.xp.createGuild(guild.id);
+    const data = {};
+    data.guild = await this.client.findGuild({ guildID: guild.id });
 
-  const sb = new guildDoc({
-    _id: guild.id,
-    prefix: client.prefix,
-  });
+    this.client.logger.log(`${guild.name} (${guild.id}) just added me!`, {
+      tag: "guildCreate",
+    });
 
-  await sb.save().catch((err) => console.log(err));
+    var channel = guild.channels.cache
+      .filter((chx) => chx.type === "text")
+      .find((x) => x.position === 0);
 
-  var channel = guild.channels.cache
-    .filter((chx) => chx.type === "text")
-    .find((x) => x.position === 0);
-
-  let newEmbed = new MessageEmbed()
-    .setColor("#9761f5")
-    .setTitle(
-      `Thanks for inviting me into this server ${client.myemojis.get(
-        "welcome"
-      )}`
-    )
-    .setDescription(
-      `- My default prefix is \`${client.prefix}\`\r\n\r\n- To change my prefix type \`${client.prefix}prefix <prefix>\`\r\n\r\n- Type \`${client.prefix}help\` to get a list of avaliable commands\r\n\r\n- Feel free to join our support server if you need help [Click here!!](\`${client.support}\`)`
-    );
-  channel.send(newEmbed);
+    let emb = embed()
+      .setColor("#9761f5")
+      .setTitle(
+        `Thanks for inviting me into this server ${this.client.emotes.get(
+          "welcome"
+        )}`
+      )
+      .setDescription(
+        `- My default prefix is \`${data.guild?.prefix}\`\r\n\r\n- To change my prefix type \`${data.guild?.prefix}prefix <prefix>\`\r\n\r\n- Use \`/help\` to get a list of avaliable commands\r\n\r\n- Feel free to join our support server if you need help [Click here!!](\`${this.client.support}\`)`
+      );
+    channel.send({embeds: [emb]});
+  }
 };

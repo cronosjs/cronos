@@ -1,47 +1,36 @@
-const chalk = require("chalk");
-const mongoose = require("mongoose");
-
-module.exports = (client) => {
-  client.user.setActivity("@cronos", { type: "WATCHING" });
-
-  let allMembers = new Set();
-  client.guilds.cache.forEach((guild) => {
-    guild.members.cache.forEach((member) => {
-      allMembers.add(member.user.id);
+module.exports = class Ready extends Event {
+  constructor() {
+    super({
+      name: "ready",
+      once: false,
     });
-  });
+  }
+  async exec() {
+    this.client.user.setActivity("@cronos", { type: "WATCHING" });
 
-  let allChannels = new Set();
-  client.guilds.cache.forEach((guild) => {
-    guild.channels.cache.forEach((channel) => {
-      allChannels.add(channel.id);
+    let allMembers = new Set();
+    this.client.guilds.cache.forEach((guild) => {
+      guild.members.cache.forEach((member) => {
+        allMembers.add(member.user.id);
+      });
     });
-  });
 
-  console.log(
-    chalk.bgMagentaBright.black(` ${client.guilds.cache.size} servers `),
-    chalk.bgMagentaBright.black(` ${client.channels.cache.size} channels `),
-    chalk.bgMagentaBright.black(` ${allMembers.size} members `)
-  );
+    let allChannels = new Set();
+    this.client.guilds.cache.forEach((guild) => {
+      guild.channels.cache.forEach((channel) => {
+        allChannels.add(channel.id);
+      });
+    });
 
-  mongoose
-    .connect(process.env.mongo_url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-    })
-    .then(
-      console.log(
-        chalk.bgGreenBright.black(
-          ` ${client.user.username} connecting to Mongo DB `
-        )
-      )
-    )
-    .catch((err) =>
-      console.log(
-        chalk.bgRedBright.black(
-          ` ${client.user.username} could not connect to mongo DB `
-        )
-      )
+    this.client.logger.log(`Connected into ${this.client.user.tag}`, {
+      tag: "Ready",
+    });
+    this.client.logger.log(
+      `Watching ${this.client.guilds.cache.size} servers | ${allMembers.size} members | ${allChannels.size} channels`,
+      {
+        tag: "Data",
+      }
     );
+    await this.client.loadInteractions();
+  }
 };

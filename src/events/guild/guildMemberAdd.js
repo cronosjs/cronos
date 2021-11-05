@@ -1,50 +1,37 @@
-const guildDoc = require("../../models/guild");
-const Meme = require("memer-api");
-const memer = new Meme("8EqDoDv8ZfI");
-const Discord = require("discord.js");
+const Canvas = require('canvas');
+const { MessageAttachment } = require('discord.js');
 
-module.exports = async (member, client) => {
-  let guildID = member.guild.id;
-
-  let guild = await client.xp.isGuild(guildID);
-  if (!guild) await client.xp.createGuild(guildID);
-
-  await client.xp.createUser(guildID, member.id);
-
-  const sDoc = await guildDoc.findOne({
-    _id: member.guild.id,
-  });
-
-  if (sDoc) {
-    let wcCh = sDoc.welcome.channel;
-    let message = sDoc.welcome.message;
-    let image = sDoc.welcome.image;
-
-    if (wcCh) {
-      let channel = client.channels.cache.get(wcCh);
-      if (message && !image) {
-        channel.send(message);
-      }
-
-      if (!message && image) {
-        let username = member.user.tag;
-        let avatar = member.user.displayAvatarURL({ format: "png" });
-        let background = image;
-
-        let img = await memer.welcome(username, avatar, background);
-        let attach = new Discord.MessageAttachment(img, "welcome.png");
-        channel.send(attach);
-      }
-
-      if (message && image) {
-        let username = member.user.username;
-        let avatar = member.user.displayAvatarURL({ format: "png" });
-        let background = image;
-
-        let img = await memer.welcome(username, avatar, background);
-        let attach = new Discord.MessageAttachment(img, "welcome.png");
-        channel.send(message, attach);
-      }
+module.exports = class GuildMemberAdd extends Event {
+    constructor() {
+        super({
+            name: "guildMemberAdd",
+            once: false,
+        });
     }
-  }
-};
+    async exec(member) {
+        const data = {};
+        data.guild = await this.client.findGuild({ guildID: member.guild.id });
+        const canvas = Canvas.createCanvas(1024, 500);
+        const ctx = canvas.getContext('2d');
+        const background = await Canvas.loadImage('./assets/welcome.jpg');
+        const channel = this.client.channels.cache.get(data.guild?.welcomeChannel);
+
+        ctx.drawImage(background, 0, 0, 1024, 500);
+        ctx.beginPath();
+        ctx.arc(512, 166, 128, 0, Math.PI * 2, true);
+        ctx.stroke();
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '42px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(member.user.tag.toUpperCase(), 512, 390);
+        ctx.beginPath();
+        ctx.arc(512, 166, 119, 0, Math.PI * 2, true);
+        ctx.closePath();
+        ctx.clip();
+        const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'png', size: 1024 }));
+        ctx.drawImage(avatar, 393, 47, 238, 238);
+        let attach = new MessageAttachment(canvas.toBuffer(), "welcome.png");
+        return channel.send({ content: `Welcome ${member} !`, files: [attach] });
+    }
+}

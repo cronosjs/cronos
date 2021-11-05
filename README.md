@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/cronos-team/cronos">
+  <a href="https://github.com/cronosjs/cronos">
     <img src="https://cdn.discordapp.com/attachments/792903485594665000/848944275580387369/CRONOS.png" alt="cronos" />
   </a>
 </p> 

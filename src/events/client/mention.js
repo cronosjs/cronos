@@ -1,22 +1,23 @@
-const guildDoc = require("../../models/guild");
+module.exports = class messageCreate extends Event {
+  constructor() {
+    super({
+      name: "messageCreate",
+      once: false,
+    });
+  }
+  async exec(message) {
+    /* If author is bot or if message isn't in guild return */
+    if (message.author.bot || !message.guild) return;
+    const data = {};
+    /* If message is in guild we return the findGuild and findUser function */
+    if (message.guild) {
+      data.guild = await this.client.findGuild({ guildID: message.guild.id });
+    }
 
-module.exports = async (message, client) => {
-  if (message.author.bot) return;
-  if (!message.guild) return;
-  if (!message.guild.me.permissionsIn(message.channel).has("SEND_MESSAGES"))
-    return;
-
-  const sDoc = await guildDoc.findOne({
-    _id: message.guild.id,
-  });
-
-  let p = sDoc ? sDoc.prefix : client.prefix;
-
-  
-  // mentioned bot
-  if (message.content.startsWith(`<@!${client.user.id}>`)) {
-    return message.channel.send(
-      `My prefix in this server is \`${p}\`\n\nTo get a list of commands, type \`${p}help\``
-    );
+    if (message.content === `<@!${this.client.user.id}>`) {
+      return message.reply(
+        `My prefix in this server is \`${data.guild?.prefix}\`\n\nTo get a list of commands, use \`/help\``
+      );
+    }
   }
 };

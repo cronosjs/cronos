@@ -69,7 +69,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-src/.env
+.env
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -102,6 +102,3 @@ dist
 
 # TernJS port file
 .tern-port
-
-# Webstrom IDE Settings
-.idea/
