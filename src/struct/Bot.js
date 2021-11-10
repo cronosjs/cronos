@@ -69,7 +69,7 @@ module.exports = class Bot extends Client {
                 if (!check) this.database.guilds.set(userId, userData);
                 return userData;
             }  else {
-                userData = new this.guildsData({ userID: userId });
+                userData = new this.usersData({ userID: userId });
                 await userData.save();
                 this.database.users.set(userId, userData);
                 return check ? userData.toJSON() : userData;
