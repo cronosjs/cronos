@@ -1,24 +1,29 @@
 const { MessageEmbed } = require("discord.js");
 
-module.exports = {
-  name: "leaderboard",
-  aliases: ["lb", "topxp"],
-  category: "leveling",
-  botPerms: ["EMBED_LINKS"],
-  async execute(client, message, args) {
-    let guildID = message.guild.id;
+module.exports = class Leaderboard extends Command {
+  constructor() {
+    super({
+      name: "leaderboard",
+      aliases: ["lb"],
+      description: "View the leaderboard of the server.",
+      usage: "<limit>",
+      category: "Leveling",
+      cooldown: 3000,
+      memberPerms: [],
+      clientPerms: [],
+    });
+  }
+  async exec(message, [limit], data) {
+    if (isNaN(limit) || limit <= 0) limit = 10;
 
-    let limit = Number(args[0]);
-    if (!limit || limit <= 0) limit = 10;
-
-    let top = await client.xp.getLeaderboard(guildID, limit);
+    let top = await this.client.xp.getLeaderboard(message.guild.id, limit);
 
     if (!top) return message.reply("Cri cri... No one has xp in this server");
 
-    let lbEmbed = new MessageEmbed().setTitle(`${message.guild}'s leaderboard`);
+    let emb = new MessageEmbed().setTitle(`${message.guild}'s leaderboard`);
 
     for (let i = 0; i < top.length; i++) {
-      lbEmbed.addField(
+      emb.addField(
         `**${i + 1}:** ${
           message.guild.members.cache.get(top[i][0]).user.username
         }`,
@@ -26,6 +31,6 @@ module.exports = {
       );
     }
 
-    return message.channel.send(lbEmbed);
-  },
+    return message.channel.send({ embeds: [emb] });
+  }
 };

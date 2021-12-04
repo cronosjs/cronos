@@ -1,13 +1,26 @@
-module.exports = {
-  name: "addlevel",
-  category: "leveling",
-  userPerms: ["MANAGE_GUILD"],
-  async execute(client, message, args) {
+module.exports = class AddLevel extends Command {
+  constructor() {
+    super({
+      name: "addlevel",
+      description: "Add levels to someone",
+      usage: "@user <levels>",
+      category: "Leveling",
+      cooldown: 3000,
+      memberPerms: ["MANAGE_GUILD"],
+      clientPerms: [],
+    });
+  }
+  async exec(message, input, data) {
+    if (!input)
+      return message.reply("Please insert the levels you want to add");
+
     // levels wanted to add
     let level = message.mentions.users.first()
-      ? args.slice(1).join(" ")
-      : args[0];
-    if(!level) return message.reply("Please insert the levels you want to add")
+      ? input.slice(1).join(" ")
+      : input[0];
+
+    if (!level || isNaN(level))
+      return message.reply("You have to put actual levels, L!");
 
     // user who will get the levels
     let target = message.mentions.users.first()
@@ -19,30 +32,36 @@ module.exports = {
       ? `Successfully added **${level}** levels to **${target.username}**'s level`
       : `Successfully added **${level}** levels to your level`;
 
-    let guildID = message.guild.id;
+    let guild = await this.client.xp.isGuild(message.guild.id);
+    if (!guild) await this.client.xp.createGuild(message.guild.id);
 
-    let guild = await client.xp.isGuild(guildID);
-    if (!guild) await client.xp.createGuild(guildID);
-
-    client.xp
-      .addLevel(guildID, target.id, level)
+    this.client.xp
+      .addLevel(message.guild.id, target.id, level)
       .then(() => {
         return message.reply(done);
       })
       .catch(async (error) => {
         if (error) {
-          let user = await client.xp.createUser(guildID, target.id);
+          let user = await this.client.xp.createUser(
+            message.guild.id,
+            target.id
+          );
           if (user) {
-            client.xp
-              .addLevel(guildID, target.id, level)
+            this.client.xp
+              .addLevel(message.guild.id, target.id, level)
               .then((result) => {
                 return message.reply(done);
               })
-              .catch((error) => {
-                return message.reply(`**Error:** ${error}`);
+              .catch((err) => {
+                this.client.logger.error(
+                  `An error occurred when trying to run addLevel command.\n${
+                    err.stack ? err + "\n\n" + err.stack : err
+                  }`,
+                  { tag: "addLevel" }
+                );
               });
           }
         }
       });
-  },
+  }
 };

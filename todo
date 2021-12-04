@@ -1,0 +1,5 @@
+1. Improve loadEvents() and fix it  it fits with the folders struct
+2. change from this.client to client using global.client (if possible)
+3. Update packages and other stuff so it fits with the new name?
+4. Economy package
+5. Make the database thing so it's less messy
